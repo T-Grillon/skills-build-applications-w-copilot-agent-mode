@@ -1,5 +1,4 @@
 import express from 'express';
-import { getApiBaseUrl } from './config/api';
 import { connectDatabase } from './config/database';
 import { Activity, LeaderboardEntry, Team, User, Workout } from './models';
 
@@ -129,6 +128,17 @@ const startServer = async () => {
     process.exit(1);
   }
 };
+
+function getApiBaseUrl(): string {
+  const codespaceName = process.env.CODESPACE_NAME;
+
+  if (codespaceName) {
+    return `https://${codespaceName}-8000.app.github.dev`;
+  }
+
+  return 'http://localhost:8000';
+}
+
 
 startServer();
 
