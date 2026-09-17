@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { fetchCollection } from '../api.js'
 
+const API_ENDPOINT = '/api/activities/'
+
 function Activities() {
   const [activities, setActivities] = useState([])
   const [error, setError] = useState('')
 
   useEffect(() => {
-    fetchCollection('activities').then(setActivities).catch((loadError) => setError(loadError.message))
+    fetchCollection(API_ENDPOINT).then(setActivities).catch((loadError) => setError(loadError.message))
   }, [])
 
   return <CollectionView title="Recent activity" eyebrow="Momentum" error={error}>
